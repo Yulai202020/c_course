@@ -1,8 +1,8 @@
 #include <stdio.h>
 
-// short int - %hd      short int from (-32768, 32767) 2 byte
-// int - %d             int from (-2147483648, 2147483647) 4 bytes
-// long int - %li
+// short int      short int from (-32768, 32767) 2 byte
+// int            int from (-2147483648, 2147483647) 4 bytes
+// long int
 // long long int - %lli
 
 // unsigned short int - %d unsigned short int (0, 65535) 2 byte
