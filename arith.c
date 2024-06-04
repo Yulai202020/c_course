@@ -35,12 +35,18 @@ int main() {
     float result4 = dividend / divisor;
     printf("%f", result4); // we print float
 
+    // modulus
+    int a = 10;
+    int b = 5;
+    int result = a % b;
+    printf("%d", result); // 0 cuz 10 devide by 5
+
     // also you can use :
     int a = 10;
-    a += 1; // adds 1, += n mean add n and write to a
-    a -= 1; // minus 1, -= n mean minus n and write to a
-    a /= 5; // devide by 5, /= n mean devide by n and write to a
-    a *= 5; // multiple by 5, *= n mean multiple by n and write to a
+    a += 1; // its like a = a + 1, adds 1, += n mean - add n and write to a
+    a -= 1; // its like a = a - 1, minus 1, -= n mean minus n and write to a
+    a /= 5; // its like a = a / 5, devide by 5, /= n mean devide by n and write to a
+    a *= 5; // its like a = a * 5, multiple by 5, *= n mean multiple by n and write to a
 
     return 0;
 }
