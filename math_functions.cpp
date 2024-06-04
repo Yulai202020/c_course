@@ -1,5 +1,6 @@
 #include <stdio.h>
 // this include is necessarily
+// and run with -lm flag
 #include <math.h>
 
 int main() {

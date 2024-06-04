@@ -25,6 +25,10 @@
 // %- left aligan
 
 int main() {
-    printf("Enter ");
+    char str[] = "";
+    printf("Enter smth: ");
+    scanf("%s", &str);
+    printf("You typed: %s\n", str);
+
     return 0;
 }

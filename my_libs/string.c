@@ -47,8 +47,18 @@ void printline(char a[]) {
     printf("%s\n", a);
 }
 
-void input(char a[], int size, char print[]) {
+void input(char* a, int size, char print[]) {
     printf(print);
     fgets(a, size, stdin);
     a[strcspn(a, "\n")] = '\0';
+}
+
+int count(char* string, char target) {
+    int count = 0;
+    for (int i = 0; i < strlen(string); i++) {
+        if (string[i] == target) {
+            count++;
+        }
+    }
+    return count;
 }
