@@ -7,7 +7,7 @@ int main() {
     printf("Enter unit (C or F): ");
     scanf("%c", &unit);
 
-    unit = toupper(unit); // like if unit was c its will be big C
+    unit = toupper(unit); // like if unit was c its will be big C but just with char
     // tolower do the same thing but vice versa.
 
     if (unit == 'C') {
