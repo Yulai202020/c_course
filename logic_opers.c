@@ -31,6 +31,8 @@ int main() {
 
     if (str == "hi" && age >= 18) {
         printf("Hello sir.\n");
+    } else if (str == "hi") {
+        printf("Hi.\n");
     }
 
     return 0;
