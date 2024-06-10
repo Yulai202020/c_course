@@ -12,7 +12,6 @@ int main() {
     res = a|b; // 1011
     printf("%b\n",res); // print bitwise but just in gcc/g++
 
-
     // XOR (^) if bites equal will be 0 else 1
     res = a^b; // 0001
     printf("%b\n",res); // print bitwise but just in gcc/g++
