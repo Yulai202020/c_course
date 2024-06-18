@@ -1,9 +1,74 @@
 #include <stdio.h>
-#include <string.h>
 #include <stdlib.h>
 #include <stdbool.h>
+
+#include <string.h>
 #include <ctype.h>
-typedef void* anytype;
+
+#include "math.c"
+
+void reverse_string(char *str) {
+    int length = strlen(str);
+    int start = 0;
+    int end = length - 1;
+    char tmp;
+
+    while (start < end) {
+        tmp = str[start];
+        str[start] = str[end];
+        str[end] = tmp;
+
+        start++;
+        end--;
+    }
+}
+
+char* itos(int number) {
+    int count = 0;
+    char* result = (char*) malloc(log(number) + 1);
+
+    while (number != 0) {
+        int rem = number % 10;
+        char tmp = rem + '0';
+        result[count++] = tmp;
+        number /= 10;
+    }
+
+    result[count] = '\0';
+    reverse_string(result);
+
+    return result;
+}
+
+int stoi(char* string) {
+    int result = 0;
+    size_t len = strlen(string);
+
+    for (int i = 0; i < len; i++) {
+        result += (string[i] - '0') * pow(10, len - i - 1);
+    }
+
+    return result;
+}
+
+char* to_binary(int number, int len) {
+    char* result = (char*) malloc(len);
+    memset(result, '0', len);
+    int b = number;
+    int count = 0;
+
+    while (b != 0) {
+        int rem = b % 2;
+        result[count] = rem + '0';
+        count++;
+        b /= 2;
+    }
+
+    result[len] = '\0';
+    reverse_string(result);
+
+    return result;
+}
 
 // get substring
 
@@ -61,7 +126,7 @@ void capitalize(char* string) {
 
 // make all symbols to upper
 
-void upper(char* string) {
+void lupper(char* string) {
     size_t len = strlen(string);
     
     for (int i = 0; i < len; i++) {
@@ -69,14 +134,34 @@ void upper(char* string) {
     }
 }
 
+char* rupper(char* string) {
+    size_t len = strlen(string);
+    char* str1 = (char*) malloc(len);
+
+    strcpy(str1, string);
+    lupper(str1);
+
+    return str1;
+}
+
 // make all symbols to lower
 
-void lower(char* string) {
+void llower(char* string) {
     size_t len = strlen(string);
     
     for (int i = 0; i < len; i++) {
         string[i] = tolower(string[i]);
     }
+}
+
+char* rlower(char* string) {
+    size_t len = strlen(string);
+    char* str1 = (char*) malloc(len);
+
+    strcpy(str1, string);
+    llower(str1);
+
+    return str1;
 }
 
 // check is lower (all string)
@@ -167,6 +252,7 @@ int count(char* string, char* target) {
 //// find char in string
 
 ////// find from start
+
 int findc(char* string, char target) {
     size_t len = strlen(string);
     
@@ -180,6 +266,7 @@ int findc(char* string, char target) {
 }
 
 ////// find from end
+
 int rfindc(char* string, char target) {
     size_t len = strlen(string);
     
@@ -195,6 +282,7 @@ int rfindc(char* string, char target) {
 //// find (sub)string in string
 
 ////// find from start
+
 int find(char* string, char* target) {
     size_t len = strlen(string);
     size_t target_len = strlen(target);
@@ -210,6 +298,7 @@ int find(char* string, char* target) {
 }
 
 ////// find from end
+
 int rfind(char* string, char* target) {
     size_t len = strlen(string);
     size_t target_len = strlen(target);
@@ -244,7 +333,6 @@ int* findallc(char* string, char target) {
 
     return res;
 }
-
 
 int* findall(char* string, char* target) {
     int count = 0;
@@ -290,4 +378,3 @@ char** _split(char* string, char desci) {
 
     return res;
 }
-
