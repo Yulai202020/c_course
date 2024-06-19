@@ -45,11 +45,11 @@ int main() {
     printf("%d\n", rfind(b, "bbbba"));
 
     int* array = findallc("bbbb", 'b');
-    int count = 0;
+    int count1 = 0;
 
-    while (array[count] != -1) {
-        printf("%d\n", array[count]);
-        count++;
+    while (array[count1] != -1) {
+        printf("%d\n", array[count1]);
+        count1++;
     }
 
     //char** tmp = split("bbbb", 'b');

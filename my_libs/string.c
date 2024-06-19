@@ -24,17 +24,17 @@ void reverse_string(char *str) {
 }
 
 char* itos(int number) {
-    int count = 0;
+    int id = 0;
     char* result = (char*) malloc(log(number) + 1);
 
     while (number != 0) {
         int rem = number % 10;
         char tmp = rem + '0';
-        result[count++] = tmp;
+        result[id++] = tmp;
         number /= 10;
     }
 
-    result[count] = '\0';
+    result[id] = '\0';
     reverse_string(result);
 
     return result;
@@ -55,12 +55,12 @@ char* to_binary(int number, int len) {
     char* result = (char*) malloc(len);
     memset(result, '0', len);
     int b = number;
-    int count = 0;
+    int id = 0;
 
     while (b != 0) {
         int rem = b % 2;
-        result[count] = rem + '0';
-        count++;
+        result[id] = rem + '0';
+        id++;
         b /= 2;
     }
 
@@ -82,11 +82,11 @@ char* substring(char* string, int start, int end) {
         exit(1);
     }
 
-    int count = 0;
+    int id = 0;
 
     for (int i = start; i < end; i++) {
-        res[count] = string[i];
-        count++;
+        res[id] = string[i];
+        id++;
     }
     
     return res;
@@ -195,11 +195,11 @@ bool is_upper(char* string) {
 
 // join strings list by sepirator
 
-char* join(char* list[], unsigned int count, char* sep) {
+char* join(char* list[], unsigned int len, char* sep) {
     char* result = "";
     
-    for (int i = 0; i < count; i++) {
-        if (i == count - 1) {
+    for (int i = 0; i < len; i++) {
+        if (i == len - 1) {
             result = stringSum(result, list[i]);
         } else {
             result = stringSum(result, list[i]);
@@ -239,7 +239,7 @@ int countc(char* string, char target) {
     return count;
 }
 
-int count(char* string, char* target) {
+int counts(char* string, char* target) {
     size_t len = strlen(string);
     size_t target_len = strlen(target);
     int count = 0;
@@ -324,7 +324,7 @@ int rfind(char* string, char* target) {
 
 // // findall chars
 int* findallc(char* string, char target) {
-    int count = 0;
+    int id = 0;
     size_t len = strlen(string) + 1;
     int* res = (int*) malloc(len * sizeof(int));
 
@@ -334,8 +334,8 @@ int* findallc(char* string, char target) {
     
     for (int i = 0; i < len - 1; i++) {
         if (string[i] == target) {
-            res[count] = i;
-            count++;
+            res[id] = i;
+            id++;
         }
     }
 
@@ -345,7 +345,7 @@ int* findallc(char* string, char target) {
 // // findall string in string
 
 int* findall(char* string, char* target) {
-    int count = 0;
+    int id = 0;
     size_t len = strlen(string) + 1;
     size_t target_len = strlen(target);
     int* res = (int*) malloc(len * sizeof(int));
@@ -357,8 +357,8 @@ int* findall(char* string, char* target) {
     for (int i = 0; i < len - 1; i++) {
         char* tmp = substring(string, i, i + target_len);
         if (are_equal(target, tmp)) {
-            res[count] = i;
-            count++;
+            res[id] = i;
+            id++;
         }
     }
 
@@ -372,16 +372,17 @@ void free_findall(int* nums) {
 }
 
 // split string by chars
-char** split(char* string, char desci) {
-    int* ids = findallc(string, desci);
-    size_t len = countc(string, desci);
+char** split(char* string, char* sep) {
+    int* ids = findall(string, sep);
+    size_t len = counts(string, sep);
     size_t string_len = strlen(string);
+    size_t sep_len = strlen(sep);
 
     char** res = malloc((len+2) * sizeof(char*));
     int last = 0;
     for (int i = 0; i < len; i++) {
         res[i] = substring(string, last, ids[i]);
-        last = ids[i] + 1;
+        last = ids[i] + sep_len;
     }
 
     res[len] = substring(string, last, string_len);
@@ -393,10 +394,12 @@ char** split(char* string, char desci) {
 // // free split variable
 
 void free_list(char** list_strings) {
-    int count = 0;
-    while (list_strings[count] != NULL) {
-        free(list_strings[count]);
-        count++;
+    int id = 0;
+
+    while (list_strings[id] != NULL) {
+        free(list_strings[id]);
+        id++;
     }
+
     free(list_strings);
 }
