@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include "string.c"
 
-
 char* readFile(const char* filename) {
     FILE *file = fopen(filename, "rb"); // Open the file in binary mode
     char *buffer = NULL;
@@ -37,7 +36,6 @@ int main() {
 
 //    printf("%d\n", rfindc(c, 'O'));
   //  printf("%d\n", find(c, "HELLO"));
-
 
 
     char* b = "bab";

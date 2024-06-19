@@ -75,6 +75,7 @@ char* to_binary(int number, int len) {
 char* substring(char* string, int start, int end) {
     size_t total_size = end - start + 1;
     char* res = (char*) malloc(total_size);
+    memset(res, '\0', total_size);
 
     if (res == NULL) {
         printf("Memory allocation failed.\n");
@@ -88,7 +89,6 @@ char* substring(char* string, int start, int end) {
         count++;
     }
     
-    res[total_size] = '\0';
     return res;
 }
 
@@ -108,6 +108,7 @@ char* stringSum(const char* str1, const char *str2) {
 
     strcpy(result, str1);
     strcat(result, str2);
+    result[total_len + 1] = '\0';
 
     return result;
 }
@@ -207,6 +208,12 @@ char* join(char* list[], unsigned int count, char* sep) {
     }
     
     return result;
+}
+
+// free string
+
+void free_string(char* string) {
+    free(string);
 }
 
 // idk just input (spaces enabled)
@@ -315,6 +322,7 @@ int rfind(char* string, char* target) {
 
 // findall
 
+// // findall chars
 int* findallc(char* string, char target) {
     int count = 0;
     size_t len = strlen(string) + 1;
@@ -333,6 +341,8 @@ int* findallc(char* string, char target) {
 
     return res;
 }
+
+// // findall string in string
 
 int* findall(char* string, char* target) {
     int count = 0;
@@ -355,26 +365,38 @@ int* findall(char* string, char* target) {
     return res;
 }
 
+// // free findall functions
 
-// its doesnt work
-char** _split(char* string, char desci) {
-//    return "ERR";
-    size_t len = strlen(string) + 1;
-    char** res = malloc(len * sizeof(char*));
+void free_findall(int* nums) {
+    free(nums);
+}
+
+// split string by chars
+char** split(char* string, char desci) {
     int* ids = findallc(string, desci);
+    size_t len = countc(string, desci);
+    size_t string_len = strlen(string);
 
-    for (int i = 0; i < len; i++) {
-        res[i] = "\0";
-    }
-
-    int count = 0;
+    char** res = malloc((len+2) * sizeof(char*));
     int last = 0;
-
-    while (ids[count] != -1) {
-        res[count] = substring(string, last, ids[count]);
-        last = ids[count];
-        count++;
+    for (int i = 0; i < len; i++) {
+        res[i] = substring(string, last, ids[i]);
+        last = ids[i] + 1;
     }
+
+    res[len] = substring(string, last, string_len);
+    res[len+1] = NULL;
 
     return res;
+}
+
+// // free split variable
+
+void free_list(char** list_strings) {
+    int count = 0;
+    while (list_strings[count] != NULL) {
+        free(list_strings[count]);
+        count++;
+    }
+    free(list_strings);
 }
