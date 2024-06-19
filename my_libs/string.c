@@ -5,7 +5,7 @@
 #include <string.h>
 #include <ctype.h>
 
-#include "math.c"
+#include <math.h>
 
 void reverse_string(char *str) {
     int length = strlen(str);
@@ -191,6 +191,15 @@ bool is_upper(char* string) {
     }
     
     return true;
+}
+
+// check startswith
+
+bool startswith(char* string, char* target) {
+    size_t len = strlen(target);
+    char* tmp = substring(string, 0, len);
+
+    return are_equal(tmp, target);
 }
 
 // join strings list by sepirator
