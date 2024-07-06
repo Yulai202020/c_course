@@ -39,7 +39,7 @@ int main() {
 
 
     char* b = "bab";
-    printf("count: %d\n", count(b, "b"));
+    printf("count: %d\n", counts(b, "b"));
 
     printf("%d\n", strlen(b));
     printf("%d\n", rfind(b, "bbbba"));
@@ -57,6 +57,7 @@ int main() {
    // while (tmp[count] != "\0") {
      //   printf("%s\n", tmp[count]);
 //    }
+
     return 0;
 
 }

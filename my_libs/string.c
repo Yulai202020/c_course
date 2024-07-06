@@ -196,10 +196,7 @@ bool is_upper(char* string) {
 // check startswith
 
 bool startswith(char* string, char* target) {
-    size_t len = strlen(target);
-    char* tmp = substring(string, 0, len);
-
-    return are_equal(tmp, target);
+    return strncmp(string, target, strlen(target)) == 0;
 }
 
 // join strings list by sepirator
