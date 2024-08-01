@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include "string.c"
 
+// dont run it cuz its just a temporary im testing here my lib
+
 char* readFile(const char* filename) {
     FILE *file = fopen(filename, "rb"); // Open the file in binary mode
     char *buffer = NULL;
@@ -38,19 +40,19 @@ int main() {
   //  printf("%d\n", find(c, "HELLO"));
 
 
-    char* b = "bab";
-    printf("count: %d\n", counts(b, "b"));
+    // char* b = "bab";
+    // printf("count: %d\n", counts(b, "b"));
 
-    printf("%d\n", strlen(b));
-    printf("%d\n", rfind(b, "bbbba"));
+    // printf("%d\n", strlen(b));
+    // printf("%d\n", rfind(b, "bbbba"));
 
-    int* array = findallc("bbbb", 'b');
-    int count1 = 0;
+    // int* array = findallc("bbbb", 'b');
+    // int count1 = 0;
 
-    while (array[count1] != -1) {
-        printf("%d\n", array[count1]);
-        count1++;
-    }
+    // while (array[count1] != -1) {
+    //     printf("%d\n", array[count1]);
+    //     count1++;
+    // }
 
     //char** tmp = split("bbbb", 'b');
     //count = 0;
@@ -58,6 +60,17 @@ int main() {
      //   printf("%s\n", tmp[count]);
 //    }
 
+
+
+
+    int a = 0;
+
+    char* string = itos(a);
+
+    printf("%s\n", string);
+
+
+    free(string);
     return 0;
 
 }

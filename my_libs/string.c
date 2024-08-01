@@ -25,7 +25,21 @@ void reverse_string(char *str) {
 
 char* itos(int number) {
     int id = 0;
-    char* result = (char*) malloc(log(number) + 1);
+    char* result;
+
+    if (number < 0) {
+        number = -number;
+        result = (char*) malloc(log(number) + 2);
+    } else if (number == 0) {
+        result = (char*) malloc(2);
+
+        result[0] = '0';
+        result[1] = '\0';
+
+        return result;
+    } else if (number > 0) {
+        result = (char*) malloc(log(number) + 1);
+    }
 
     while (number != 0) {
         int rem = number % 10;
@@ -34,7 +48,13 @@ char* itos(int number) {
         number /= 10;
     }
 
-    result[id] = '\0';
+    if (number > 0) {
+        result[id] = '\0';
+    } else {
+        result[id] = '-';
+        result[id+1] = '\0';
+    }
+
     reverse_string(result);
 
     return result;
