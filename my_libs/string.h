@@ -1,44 +1,73 @@
+#ifndef STRING_UTILS_H
+#define STRING_UTILS_H
+
 #include <stdbool.h>
-#ifndef STRING_H_
-#define STRING_H_
+#include <stddef.h>
+#include <string.h>
+#include <ctype.h>
+#include <stdlib.h>
+#include <math.h>
+#include <stdio.h>
+
+// Function prototypes
+
+// (name of function)s - means function works with string but not sjson its has args start
+// (name of function)c - means function works with char (its mean its faster)
+// r(name of function) - means function return result but not rfind... rfind finds from end
+// l(name of function) - means function its change arg to result
+// input - function return what inputed user
 
 void reverse_string(char *str);
+
 char* itos(int number);
-int stoi(char* string);
-char* to_binary(int number, int len);
-char* substring(char* string, int start, int end);
-char* stringSum(const char* str1, const char *str2);
-bool are_equal(char* a, char* b);
-void capitalize(char* string);
+int stoi(const char* string);
 
-bool is_upper(char* string);
-void lupper(char* string);
-char* rupper(char* string);
+char* to_binary(int number, int len); // like 16 to 10000 (as string)
 
-void llower(char* string);
-char* rlower(char* string);
-bool is_lower(char* string);
+char* substring(const char* string, int start, int end); // get sub string of string
 
-char* join(char* list[], unsigned int count, char* sep);
+char* stringSumRealloc(char* str1, const char* str2); // its use not many ram but str1 gotta be created my malloc
+char* stringSum(const char* str1, const char* str2); // its use many ram (takes with malloc sum of len str1 and str2) but str1 and str2 cloundn't inited by malloc
 
-void free_string(char* string);
-void input(char* a, int size, char print[]);
-int countc(char* string, char target);
-int counts(char* string, char* target);
+bool are_equal(const char* a, const char* b); // are equal 2 strings (uses strcmp)
 
-int findc(char* string, char target);
-int rfindc(char* string, char target);
+void capitalize(char* string); // first element to upper
 
-int find(char* string, char* target);
-int rfind(char* string, char* target);
+void lupper(char* string); // change string to upper
+char* rupper(const char* string); // return changed string (not changing string)
 
-int* findallc(char* string, char target);
-int* findall(char* string, char* target);
+void llower(char* string); // do same think as lupper but lower
+char* rlower(const char* string); // do same think as rupper but lower
 
-void free_findall(int* nums);
+bool is_lower(const char* string); // is lower
+bool is_upper(const char* string); // is upper
 
-char** split(char* string, char* desci);
+bool startswith(const char* string, const char* target); // strncmp alias
 
-void free_list(char** list_strings);
+char* join(char* list[], unsigned int len, const char* sep); // join list by sep
+char* sjoin(char* list[], unsigned int start, unsigned int end, const char* sep); // join list by sep but with start
 
-#endif
+void free_string(char* string); // freeing
+
+void input(char* a, int size, const char* print); // function change a args to what inputed user
+
+int countc(const char* string, char target); // count chars with equal to target in string
+int counts(const char* string, const char* target); // count string with equal to target in string
+
+int findc(const char* string, char target); // find char from start
+int rfindc(const char* string, char target); // find char from end
+
+int find(const char* string, const char* target); // find string from start
+int rfind(const char* string, const char* target); // find string from end
+
+int* findallc(const char* string, char target); // find all chats from start
+int* findall(const char* string, const char* target); // find all string from start
+
+// yeah for now rfindall and rfindallc doesnt exists
+
+void free_findall(int* nums); // free what returned findall
+
+char** split(const char* string, const char* sep); // split
+void free_list(char** list_strings); // free what returned split
+
+#endif // STRING_UTILS_H

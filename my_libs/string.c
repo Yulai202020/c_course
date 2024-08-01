@@ -94,12 +94,31 @@ char* substring(char* string, int start, int end) {
 
 // sum of strings like in c++
 
-char* stringSum(const char* str1, const char *str2) {
+char* stringSumRealloc(const char* str1, const char* str2) {
+    size_t len1 = strlen(str1);
+    size_t len2 = strlen(str2);
+    size_t total_len = len1 + len2 + 1;
+
+    // Reallocate memory to fit the new string
+    char* new_base = (char*) realloc(str1, total_len);
+
+    if (new_base == NULL) {
+        printf("Memory reallocation failed.\n");
+        exit(1);
+    }
+
+    // Concatenate addition to the new base string
+    strcat(new_base, str2);
+
+    return new_base;
+}
+
+char* stringSum(const char* str1, const char* str2) {
     size_t len1 = strlen(str1);
     size_t len2 = strlen(str2);
     size_t total_len = len1 + len2;
 
-    char* result = (char*)malloc(total_len + 1);
+    char* result = (char*) malloc(total_len + 1);
 
     if (result == NULL) {
         printf("Memory allocation failed.\n");
@@ -206,10 +225,31 @@ char* join(char* list[], unsigned int len, char* sep) {
     
     for (int i = 0; i < len; i++) {
         if (i == len - 1) {
-            result = stringSum(result, list[i]);
-        } else {
+            result = stringSumRealloc(result, list[i]);
+        } else if (i == 0){
             result = stringSum(result, list[i]);
             result = stringSum(result, sep);
+        } else {
+            result = stringSumRealloc(result, list[i]);
+            result = stringSumRealloc(result, sep);
+        }
+    }
+    
+    return result;
+}
+
+char* sjoin(char* list[], unsigned int start, unsigned int end, char* sep) {
+    char* result = "";
+    
+    for (int i = start; i < end; i++) {
+        if (i == end - 1) {
+            result = stringSumRealloc(result, list[i]);
+        } else if (i == start){
+            result = stringSum(result, list[i]);
+            result = stringSum(result, sep);
+        } else {
+            result = stringSumRealloc(result, list[i]);
+            result = stringSumRealloc(result, sep);
         }
     }
     
