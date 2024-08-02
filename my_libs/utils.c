@@ -45,9 +45,9 @@ void swap(int* first_num, int* second_num) {
 }
 
 void sort(int arr[], int start, int end, bool (*function_order)(int a, int b)) {
-    int i, j, min_idx; 
-    for (i = start; i < end - 1; i++) { 
-        min_idx = i; 
+    int i, j, min_idx;
+    for (i = start; i < end - 1; i++) {
+        min_idx = i;
 
         for (j = i + 1; j < end; j++) {
             if (function_order(arr[j], arr[min_idx])) {
@@ -55,10 +55,9 @@ void sort(int arr[], int start, int end, bool (*function_order)(int a, int b)) {
             }
         }
 
-        swap(&arr[min_idx], &arr[i]); 
-    } 
-} 
-  
+        swap(&arr[min_idx], &arr[i]);
+    }
+}
 
 bool bigger(int a, int b) {
     return a <= b;
