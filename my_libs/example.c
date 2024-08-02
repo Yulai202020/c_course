@@ -4,8 +4,8 @@
 // dont run it cuz its just a temporary im testing here my lib
 
 char* readFile(const char* filename) {
-    FILE *file = fopen(filename, "rb"); // Open the file in binary mode
-    char *buffer = NULL;
+    FILE* file = fopen(filename, "rb"); // Open the file in binary mode
+    char* buffer = NULL;
     long length;
 
     if (file) {

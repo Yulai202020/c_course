@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdarg.h>
+#include <stdbool.h>
+#include <string.h>
 
 double to_percentage(int current_num, int max) {
     return (current_num*100)/max;
@@ -34,4 +36,58 @@ void free_all(void* first, ...) {
     }
 
     va_end(args);
+}
+
+void swap(int* first_num, int* second_num) {
+    int tmp = *first_num;
+    *first_num = *second_num;
+    *second_num = tmp;
+}
+
+void sort(int arr[], int start, int end, bool (*function_order)(int a, int b)) {
+    int i, j, min_idx; 
+    for (i = start; i < end - 1; i++) { 
+        min_idx = i; 
+
+        for (j = i + 1; j < end; j++) {
+            if (function_order(arr[j], arr[min_idx])) {
+                min_idx = j;
+            }
+        }
+
+        swap(&arr[min_idx], &arr[i]); 
+    } 
+} 
+  
+
+bool bigger(int a, int b) {
+    return a <= b;
+}
+
+bool lower(int a, int b) {
+    return a >= b;
+}
+
+int max(int list[], int size) {
+    int array[size];
+    memset(array, 0, size);
+
+    for (int i = 0; i < size; i++) {
+        array[i] = list[i];
+    }
+
+    sort(array, 0, size, lower);
+    return array[0];
+}
+
+int min(int list[], int size) {
+    int array[size];
+    memset(array, 0, size);
+
+    for (int i = 0; i < size; i++) {
+        array[i] = list[i];
+    }
+
+    sort(array, 0, size, bigger);
+    return array[0];
 }
