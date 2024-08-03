@@ -24,7 +24,7 @@ char* readFile(const char* filename) {
     return buffer; // Return the buffer
 }
 
-int main() {
+int main(int argc, char** argv) {
 //    char* a[2] = {"a", "hello world"};
 //    char* c = join(a, 2, " ");
 //    printf("%s\n", c);
@@ -61,16 +61,10 @@ int main() {
 //    }
 
 
+    char* tmp = sjoin(argv, 0, argc, " ");
 
+    printf(tmp);
 
-    int a = 0;
-
-    char* string = itos(a);
-
-    printf("%s\n", string);
-
-
-    free(string);
     return 0;
 
 }

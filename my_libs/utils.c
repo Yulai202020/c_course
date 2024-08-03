@@ -90,3 +90,20 @@ int min(int list[], int size) {
     sort(array, 0, size, bigger);
     return array[0];
 }
+
+void printlist(char** list, int size) {
+    for (int i = 0; i < size; i++) {
+        if (i == 0) {
+            printf("[");
+        }
+        
+        printf(list[i]);
+
+        if (i == size - 1) {
+            printf("]");
+        } else {
+            printf(",");
+        }
+    }
+
+}

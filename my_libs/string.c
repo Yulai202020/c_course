@@ -244,13 +244,13 @@ char* join(char* list[], unsigned int len, char* sep) {
     char* result = "";
     
     for (int i = 0; i < len; i++) {
-        if (i == len - 1) {
-            result = stringSumRealloc(result, list[i]);
-        } else if (i == 0){
+        if (i == 0) {
             result = stringSum(result, list[i]);
-            result = stringSum(result, sep);
         } else {
             result = stringSumRealloc(result, list[i]);
+        }
+
+        if (i != len - 1) {
             result = stringSumRealloc(result, sep);
         }
     }
@@ -262,13 +262,13 @@ char* sjoin(char* list[], unsigned int start, unsigned int end, char* sep) {
     char* result = "";
     
     for (int i = start; i < end; i++) {
-        if (i == end - 1) {
-            result = stringSumRealloc(result, list[i]);
-        } else if (i == start){
+        if (i == start) {
             result = stringSum(result, list[i]);
-            result = stringSum(result, sep);
         } else {
             result = stringSumRealloc(result, list[i]);
+        }
+
+        if (i != end - 1) {
             result = stringSumRealloc(result, sep);
         }
     }
