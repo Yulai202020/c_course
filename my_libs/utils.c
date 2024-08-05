@@ -91,13 +91,14 @@ int min(int list[], int size) {
     return array[0];
 }
 
-void printlist(char** list, int size) {
+void printlist(void* list[], int size, const char* format) {
     for (int i = 0; i < size; i++) {
         if (i == 0) {
             printf("[");
         }
         
-        printf(list[i]);
+        // Cast list[i] to char* for correct printf usage
+        printf(format, list[i]);
 
         if (i == size - 1) {
             printf("]");
@@ -105,5 +106,16 @@ void printlist(char** list, int size) {
             printf(",");
         }
     }
+}
+
+void main() {
+    int list[] = {1, 2};
+    void* tmp_list[] = {&list[0], &list[1]};
+    printlist((void**) tmp_list, 2, "%f");
+
+    // for (int i = 0; i < 2; i++) {
+    //     free(tmp_list[i]);
+    // }
+    // free(tmp_list);
 
 }
