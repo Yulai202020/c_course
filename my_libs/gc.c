@@ -13,6 +13,39 @@ void init_gc() {
     }
 }
 
+void gc_free(void* target) {
+    int id = -1;
+    for (int i = 0; i < count; i++) {
+        if (list_ptrs[i] == target) {
+            id = i;
+        }
+    }
+
+    if (id == -1) {
+        printf("\n");
+        return;
+    }
+
+    free(list_ptrs[id]);
+
+    for (int i = id; i < count-1; i++) {
+        list_ptrs[i] = list_ptrs[i+1];
+    }
+
+    list_ptrs[count-1] = NULL;
+    count--;
+}
+
+void finish_gc() {
+    for (int i = 0; i < count; i++) {
+        free(list_ptrs[i]);
+    }
+
+    free(list_ptrs);
+    list_ptrs = NULL;
+    count = 0;
+}
+
 void* gc_malloc(int size){
     void* ptr = malloc(size);
     if (ptr == NULL) {
@@ -32,12 +65,20 @@ void* gc_malloc(int size){
     return ptr;
 }
 
-void finish_gc() {
-    for (int i = 0; i < count; i++) {
-        free(list_ptrs[i]);
-    }
+void* gc_realloc(void* base, int new_size) {
+    void* ptr = gc_malloc(new_size);
+    strcpy(ptr, base);
+    return ptr;
+}
 
-    free(list_ptrs);
-    list_ptrs = NULL;
-    count = 0;
+void* gc_calloc(int num, int size) {
+    void* ptr = gc_malloc(num * size);
+    return ptr;
+}
+
+int main() {
+    init_gc();
+    char* a = gc_malloc(2);
+    gc_realloc(a, 200000);
+    finish_gc();
 }
