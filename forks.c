@@ -12,7 +12,7 @@ int main() {
     } 
     else if (p == 0) {
         printf("Child pid: %d\n", getpid());
-        sleep(1000);
+        sleep(1000); // programm will be complited not in 1000 seconds cuz parent thread will exit
     } else {
         printf("Parent pid: %d\n", getpid());
     }
