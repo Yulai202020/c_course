@@ -7,6 +7,7 @@ void** list_ptrs = NULL;
 
 void init_gc() {
     list_ptrs = (void**) malloc(count * sizeof(void*));
+
     if (list_ptrs == NULL) {
         fprintf(stderr, "Memory allocation failed in init_gc.\n");
         exit(1);
@@ -48,6 +49,7 @@ void finish_gc() {
 
 void* gc_malloc(int size){
     void* ptr = malloc(size);
+
     if (ptr == NULL) {
         fprintf(stderr, "Memory reallocation failed in gc_malloc.\n");
         exit(1);

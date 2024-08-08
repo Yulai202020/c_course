@@ -7,6 +7,12 @@ typedef struct {
 
 parent_obj* parent_obj__init(int test) {
     parent_obj* ptr = (parent_obj*) malloc(sizeof(parent_obj));
+
+    if (ptr == NULL) {
+        fprintf(stderr, "Memory reallocation failed in parent_obj__init.\n");
+        exit(1);
+    }
+
     ptr->test = test;
     return ptr;
 }
