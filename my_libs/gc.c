@@ -75,10 +75,3 @@ void* gc_calloc(int num, int size) {
     void* ptr = gc_malloc(num * size);
     return ptr;
 }
-
-int main() {
-    init_gc();
-    char* a = gc_malloc(2);
-    gc_realloc(a, 200000);
-    finish_gc();
-}
