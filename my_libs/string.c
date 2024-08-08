@@ -30,8 +30,18 @@ char* itos(int number) {
     if (number < 0) {
         number = -number;
         result = (char*) malloc(log(number) + 2);
+
+        if (result == NULL) {
+            fprintf(stderr, "Memory allocation failed in itos.\n");
+            exit(1);
+        }
     } else if (number == 0) {
         result = (char*) malloc(2);
+
+        if (result == NULL) {
+            fprintf(stderr, "Memory allocation failed in itos.\n");
+            exit(1);
+        }
 
         result[0] = '0';
         result[1] = '\0';
@@ -39,6 +49,11 @@ char* itos(int number) {
         return result;
     } else if (number > 0) {
         result = (char*) malloc(log(number) + 1);
+
+        if (result == NULL) {
+            fprintf(stderr, "Memory allocation failed in itos.\n");
+            exit(1);
+        }
     }
 
     while (number != 0) {
@@ -73,6 +88,12 @@ int stoi(char* string) {
 
 char* to_binary(int number, int len) {
     char* result = (char*) malloc(len);
+
+    if (result == NULL) {
+        fprintf(stderr, "Memory allocation failed in to_binary.\n");
+        exit(1);
+    }
+
     memset(result, '0', len);
     int b = number;
     int id = 0;
@@ -94,22 +115,23 @@ char* to_binary(int number, int len) {
 
 char* substring(char* string, int start, int end) {
     size_t total_size = end - start + 1;
-    char* res = (char*) malloc(total_size);
-    memset(res, '\0', total_size);
+    char* result = (char*) malloc(total_size);
 
-    if (res == NULL) {
+    if (result == NULL) {
         printf("Memory allocation failed.\n");
         exit(1);
     }
 
+    memset(result, '\0', total_size);
+
     int id = 0;
 
     for (int i = start; i < end; i++) {
-        res[id] = string[i];
+        result[id] = string[i];
         id++;
     }
     
-    return res;
+    return result;
 }
 
 // sum of strings like in c++
@@ -123,7 +145,7 @@ char* stringSumRealloc(const char* str1, const char* str2) {
     char* new_base = (char*) realloc(str1, total_len);
 
     if (new_base == NULL) {
-        printf("Memory reallocation failed.\n");
+        printf("Memory reallocation failed in stringSumRealloc.\n");
         exit(1);
     }
 
@@ -141,7 +163,7 @@ char* stringSum(const char* str1, const char* str2) {
     char* result = (char*) malloc(total_len + 1);
 
     if (result == NULL) {
-        printf("Memory allocation failed.\n");
+        printf("Memory allocation failed in stringSum.\n");
         exit(1);
     }
 
@@ -178,6 +200,11 @@ char* rupper(char* string) {
     size_t len = strlen(string);
     char* str1 = (char*) malloc(len);
 
+    if (str1 == NULL) {
+        printf("Memory allocation failed in rlower.\n");
+        exit(1);
+    }
+
     strcpy(str1, string);
     lupper(str1);
 
@@ -197,6 +224,11 @@ void llower(char* string) {
 char* rlower(char* string) {
     size_t len = strlen(string);
     char* str1 = (char*) malloc(len);
+
+    if (str1 == NULL) {
+        printf("Memory allocation failed in rlower.\n");
+        exit(1);
+    }
 
     strcpy(str1, string);
     llower(str1);
@@ -241,7 +273,7 @@ bool startswith(char* string, char* target) {
 // join strings list by sepirator
 
 char* join(char* list[], unsigned int len, char* sep) {
-    char* result = "";
+    char* result;
     
     for (int i = 0; i < len; i++) {
         if (i == 0) {
@@ -392,43 +424,55 @@ int rfind(char* string, char* target) {
 int* findallc(char* string, char target) {
     int id = 0;
     size_t len = strlen(string) + 1;
-    int* res = (int*) malloc(len * sizeof(int));
+    int* result = (int*) malloc(len * sizeof(int));
+
+    if (result == NULL) {
+        printf("Memory allocation failed in findallc.\n");
+        exit(1);
+    }
 
     for (int i = 0; i < len; i++) {
-        res[i] = -1;
+        result[i] = -1;
     }
     
     for (int i = 0; i < len - 1; i++) {
         if (string[i] == target) {
-            res[id] = i;
+            result[id] = i;
             id++;
         }
     }
 
-    return res;
+    return result;
 }
 
 // // findall string in string
 
 int* findall(char* string, char* target) {
     int id = 0;
+
     size_t len = strlen(string) + 1;
     size_t target_len = strlen(target);
-    int* res = (int*) malloc(len * sizeof(int));
+
+    int* result = (int*) malloc(len * sizeof(int));
+
+    if (result == NULL) {
+        printf("Memory allocation failed in findall.\n");
+        exit(1);
+    }
 
     for (int i = 0; i < len; i++) {
-        res[i] = -1;
+        result[i] = -1;
     }
 
     for (int i = 0; i < len - 1; i++) {
         char* tmp = substring(string, i, i + target_len);
         if (are_equal(target, tmp)) {
-            res[id] = i;
+            result[id] = i;
             id++;
         }
     }
 
-    return res;
+    return result;
 }
 
 // // free findall functions
@@ -440,21 +484,29 @@ void free_findall(int* nums) {
 // split string by chars
 char** split(char* string, char* sep) {
     int* ids = findall(string, sep);
+
     size_t len = counts(string, sep);
     size_t string_len = strlen(string);
     size_t sep_len = strlen(sep);
 
-    char** res = malloc((len+2) * sizeof(char*));
+    char** result = (char**) malloc((len+2) * sizeof(char*));
+
+    if (result == NULL) {
+        printf("Memory allocation failed in findall.\n");
+        exit(1);
+    }
+
     int last = 0;
+
     for (int i = 0; i < len; i++) {
-        res[i] = substring(string, last, ids[i]);
+        result[i] = substring(string, last, ids[i]);
         last = ids[i] + sep_len;
     }
 
-    res[len] = substring(string, last, string_len);
-    res[len+1] = NULL;
+    result[len] = substring(string, last, string_len);
+    result[len+1] = NULL;
 
-    return res;
+    return result;
 }
 
 // // free split variable
