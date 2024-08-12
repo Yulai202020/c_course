@@ -8,7 +8,7 @@ int main() {
     printf("First element = %d\n", numbers[0]); // elements ids starts with 0
 
     printf("All items (include first):\n");
-    // print all 
+    // print all
     for (int i = 0; i < size; i++) {
         printf("%d\n", numbers[i]);
     }

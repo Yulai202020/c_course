@@ -8,7 +8,7 @@ struct ListNode {
 
 typedef struct ListNode ListNode;
 
-ListNode* init(int data) { // ok
+ListNode* init(int data) {
     ListNode* ptr = (ListNode*) malloc(sizeof(ListNode));
 
     if (ptr == NULL) {
@@ -21,7 +21,7 @@ ListNode* init(int data) { // ok
     return ptr;
 }
 
-void free_listnode(ListNode* first) { // ok
+void free_listnode(ListNode* first) {
     ListNode* latest = first;
 
     while (latest != NULL) {
@@ -31,7 +31,7 @@ void free_listnode(ListNode* first) { // ok
     }
 }
 
-int get_length(ListNode* first) { // ok
+int get_length(ListNode* first) {
     int count = 1;
     ListNode* latest = first->next;
 
@@ -43,7 +43,7 @@ int get_length(ListNode* first) { // ok
     return count;
 }
 
-ListNode* get_by_id(ListNode* first, int id) { // ok
+ListNode* get_by_id(ListNode* first, int id) {
     if (id < 0) {
         id = get_length(first) + id;
     }
@@ -59,10 +59,8 @@ ListNode* get_by_id(ListNode* first, int id) { // ok
     return latest;
 }
 
-int push_back(ListNode* first, int data) { // ok
+int push_back(ListNode* first, int data) {
     ListNode* latest = get_by_id(first, -1);
-
-    // we got latest
 
     ListNode* ptr = (ListNode*) malloc(sizeof(ListNode));
 
@@ -79,20 +77,19 @@ int push_back(ListNode* first, int data) { // ok
 }
 
 ListNode* delete_by_id(ListNode* first, int id) {
+    ListNode* to_delete = get_by_id(first, id);
+
     if (id == 0) {
-        ListNode* new_first = first;
-        first = new_first->next;
-        free(new_first);
-        return first;
-    } else {
-        ListNode* to_delete = get_by_id(first, id);
-        ListNode* prev = get_by_id(first, id-1);
-        prev->next = to_delete->next;
+        first = to_delete->next;
         free(to_delete);
         return first;
     }
 
-    return 0;
+    ListNode* prev = get_by_id(first, id-1);
+    prev->next = to_delete->next;
+    free(to_delete);
+
+    return first;
 }
 
 void printlist(ListNode* first) {
@@ -104,15 +101,4 @@ void printlist(ListNode* first) {
         latest = latest->next;
         count++;
     }
-}
-
-int main() {
-    ListNode* tmp = init(100);
-    push_back(tmp, 2);
-
-    int size = get_length(tmp);
-    printf("size: %d\n", size);
-
-    printlist(tmp);
-    free_listnode(tmp);
 }
