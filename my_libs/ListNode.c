@@ -8,7 +8,7 @@ struct ListNode {
 
 typedef struct ListNode ListNode;
 
-ListNode* init(int data) {
+ListNode* init(int data) { // NULL is failed
     ListNode* ptr = (ListNode*) malloc(sizeof(ListNode));
 
     if (ptr == NULL) {
@@ -59,7 +59,7 @@ ListNode* get_by_id(ListNode* first, int id) {
     return latest;
 }
 
-int push_back(ListNode* first, int data) {
+int push_back(ListNode* first, int data) { // if 0 - anythink is ok, 1 - failed
     ListNode* latest = get_by_id(first, -1);
 
     ListNode* ptr = (ListNode*) malloc(sizeof(ListNode));
